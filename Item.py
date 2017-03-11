@@ -30,6 +30,17 @@ class Food(Item):
         return self.type
     def getCold(self):
         return self.cold
+
+    def eat(self):
+        self.quantity -= 1
+        if self.getQuantity() == 1:
+            return ("You just ate an " + self.getName() + '! There are ' + str(self.getQuantity()) + ' ' + self.getName() + " left.")
+        else:
+            return ("You just ate an " + self.getName() + '! There are ' + str(self.getQuantity()) + ' ' + self.getName() + "'s left.")
+
+    def spoil(self,quantity):
+        self.quantity -= quantity
+        return ("You have lost " + str(self.getQuantity()) + ' ' + self.getName() + "'s because they have spoiled.")
     def __str__(self):
         return (Item.__str__(self) + '\nFood Type: ' + self.getType() + "\nNeed Refridgeration: " + str(self.getCold())+'\n')
 class Dishes(Item):
@@ -37,13 +48,24 @@ class Dishes(Item):
         super(Dishes,self).__init__(name,quantity,price)
         self.dish = dishType
         self.clean = isClean
+        self.stored = 0
     def getDishType(self):
         return self.dish
     def getIsClean(self):
         return self.clean
+    def putAway(self, Amount):
+        self.stored += Amount
+        return "You have put away " + str(Amount) + ' ' + self.getName() + "'s "
+    def broke(self):
+        self.quantity -= 1
+        return "You broke a " + self.getName() + '. You have ' + str(self.getQuantity()) + ' left.'
     def __str__(self):
         return (Item.__str__(self) + '\nDish Type: ' + self.getDishType() + '\nCurrently Clean: ' + str(self.getIsClean()) + '\n')
 newApple = Food('apple',10,2.25,'fruit',False)
 print(newApple)
 newPlate = Dishes('Orange Plate', 5,8.00,'Plate',True)
 print(newPlate)
+print(newApple.eat())
+print(newApple.spoil(3))
+print(newPlate.putAway(2))
+print(newPlate.broke())
