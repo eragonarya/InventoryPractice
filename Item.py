@@ -43,9 +43,9 @@ class Food(Item):
         return ("You have lost " + str(self.getQuantity()) + ' ' + self.getName() + "'s because they have spoiled.")
     def __str__(self):
         return (Item.__str__(self) + '\nFood Type: ' + self.getType() + "\nNeed Refridgeration: " + str(self.getCold())+'\n')
-class Dishes(Item):
+class Dish(Item):
     def __init__(self,name,quantity,price,dishType,isClean):
-        super(Dishes,self).__init__(name,quantity,price)
+        super(Dish,self).__init__(name,quantity,price)
         self.dish = dishType
         self.clean = isClean
         self.stored = 0
@@ -63,7 +63,7 @@ class Dishes(Item):
         return (Item.__str__(self) + '\nDish Type: ' + self.getDishType() + '\nCurrently Clean: ' + str(self.getIsClean()) + '\n')
 # newApple = Food('apple',10,2.25,'fruit',False)
 # print(newApple)
-# newPlate = Dishes('Orange Plate', 5,8.00,'Plate',True)
+# newPlate = dish('Orange Plate', 5,8.00,'Plate',True)
 # print(newPlate)
 # print(newApple.eat())
 # print(newApple.spoil(3))

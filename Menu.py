@@ -1,3 +1,4 @@
+from Item import Food, Dish, Item
 class Menu:
     def __init__(self, validFood,validDish,validView,validExit):
         self.validFood = validFood
@@ -32,6 +33,24 @@ class Menu:
         result = self.validateCommand(user)
         return result
 
+    def displayNewItem(self,userInput):
+        name = input("Name of the item?")
+        qty = input("How many do you have?")
+        price = input("How much does the item cost?")
+        if userInput == 1:
+            foodType = input("What kind of food is it?")
+            isCold = input("Does this food item need to be refridgerated?[True/False]")
+            food = Food(name,qty,price,foodType,isCold)
+            print(food)
+            return food
+        elif userInput == 2:
+            dishType = input("What kind of dish is it?")
+            isClean = input("Is this dish clean?[True/False]")
+            dish = Dish(name,qty,price,dishType,isClean)
+            print(dish)
+            return dish
+
+
     def __str__(self):
         return ("Create a food: "+ self.validFood + "\n" +
         "Create a dish: " + self.validDish + "\n" +
@@ -40,4 +59,15 @@ class Menu:
         )
 
 menu = Menu("food","dish","view","exit")
-print(menu.getUserInput())
+currentInput = menu.getUserInput()
+while currentInput != 4:
+    if currentInput == 1 or currentInput == 2:
+        menu.displayNewItem(currentInput)
+        currentInput = menu.getUserInput()
+    elif currentInput == 3:
+        print("View")
+        currentInput = menu.getUserInput()
+    else:
+        currentInput = 0
+        print("I'm sorry, that wasn't an available command.")
+        currentInput = menu.getUserInput()
