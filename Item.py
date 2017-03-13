@@ -29,6 +29,9 @@ class Food(Item):
     def getType(self):
         return self.type
     def getCold(self):
+        return bool(self.cold)
+    def setCold(self, newValue):
+        self.cold = newValue
         return self.cold
 
     def eat(self):
